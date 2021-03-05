@@ -4,7 +4,8 @@ const mongoose = require("mongoose");
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// const { Users } = require("./models");
+//will the following line be sufficient or will they all need to be imported? TBD
+const { Users } = require("./models");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -18,11 +19,11 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/usersdb", {
 mongoose.set("useCreateIndex", true);
 mongoose.set("debug", true);
 
-// Create a new notebook
-app.post("/api/notebooks", ({ body }, res) => {
-  Notebook.create(body)
-    .then((dbNotebookData) => {
-      res.json(dbNotebookData);
+// Create a new user
+app.post("/api/users", ({ body }, res) => {
+  Users.create(body)
+    .then((dbUsersData) => {
+      res.json(dbUsersData);
     })
     .catch((err) => {
       res.json(err);
