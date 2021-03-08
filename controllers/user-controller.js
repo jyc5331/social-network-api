@@ -4,7 +4,7 @@ const userController = {
   // get all users
   getAllUsers(req, res) {
     Users.find({})
-      .then((dbUserData) => res.json(dbUserData))
+      .then((dbUsersData) => res.json(dbUsersData))
       .catch((err) => {
         console.log(err);
         res.status(400).json(err);
@@ -28,10 +28,10 @@ const userController = {
         res.status(400).json(err);
       });
   },
-  // createPizza
-  createPizza({ body }, res) {
-    Pizza.create(body)
-      .then((dbPizzaData) => res.json(dbPizzaData))
+  // createUser
+  createUser({ body }, res) {
+    Users.create(body)
+      .then((dbUsersData) => res.json(dbUsersData))
       .catch((err) => res.status(400).json(err));
   },
   // update pizza by id
