@@ -1,10 +1,10 @@
-const { Pizza } = require("../models");
+const { Users } = require("../models");
 
-const pizzaController = {
-  // get all pizzas
-  getAllPizza(req, res) {
-    Pizza.find({})
-      .then((dbPizzaData) => res.json(dbPizzaData))
+const userController = {
+  // get all users
+  getAllUsers(req, res) {
+    Users.find({})
+      .then((dbUserData) => res.json(dbUserData))
       .catch((err) => {
         console.log(err);
         res.status(400).json(err);
@@ -63,4 +63,4 @@ const pizzaController = {
   },
 };
 
-module.exports = pizzaController;
+module.exports = userController;
