@@ -5,7 +5,7 @@ const opts = { toJSON: { virtuals: true }, id: false };
 
 //users
 
-const usersSchema = new Schema(
+const UsersSchema = new Schema(
   {
     username: {
       type: String,
@@ -21,23 +21,19 @@ const usersSchema = new Schema(
       match: [/.+@.+\..+/],
     },
 
-    userCreated: {
-      type: Date,
-      default: Date.now,
-    },
     //HELP Friends: Array of \_id values referencing the User model (self-reference)
     //reactions: [reactionsSchema],
-    //thoughts: [thoughtsSchema],
+    //thoughts: [thoughtsSchema],     thoughts: {type: mongoose.Schema.Types.ObjectId, ref: 'Thoughts'},
   },
   opts
 );
 
-UserSchema.virtual("friendCount").get(function () {
+UsersSchema.virtual("friendCount").get(function () {
   return "hello";
   //retrieves the length of the user's friends array field on query
   //return this(friends.length)
 });
 
-const Users = model("Users", usersSchema);
+const Users = model("Users", UsersSchema);
 
 module.exports = Users;
