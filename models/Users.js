@@ -23,15 +23,22 @@ const UsersSchema = new Schema(
 
     //HELP Friends: Array of \_id values referencing the User model (self-reference)
     //reactions: [reactionsSchema],
-    //thoughts: [thoughtsSchema],     thoughts: {type: mongoose.Schema.Types.ObjectId, ref: 'Thoughts'},
+    thoughts: [
+      //HELP should these actually be showing up? thoughtText isn't showing up anywhere
+      {
+        type: Schema.Types.ObjectId,
+        //ref tells mongoose from whence to populate the specified array, Thoughts.js
+        ref: "Thoughts",
+      },
+    ],
   },
   opts
 );
 
 UsersSchema.virtual("friendCount").get(function () {
   return "hello";
-  //retrieves the length of the user's friends array field on query
-  //return this(friends.length)
+  //retrieves the length of the user's friends array field on query the code will be:
+  //return this.friends.length
 });
 
 const Users = model("Users", UsersSchema);
