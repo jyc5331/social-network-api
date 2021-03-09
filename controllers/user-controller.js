@@ -34,17 +34,17 @@ const userController = {
       .then((dbUsersData) => res.json(dbUsersData))
       .catch((err) => res.status(400).json(err));
   },
-  // update pizza by id
-  updatePizza({ params, body }, res) {
+  // update user by id
+  updateUser({ params, body }, res) {
     //new: true instructs mongoose to return the new version of your object
     //without new: true, you would update the object, but still only access the 'old' version
-    Pizza.findOneAndUpdate({ _id: params.id }, body, { new: true })
-      .then((dbPizzaData) => {
-        if (!dbPizzaData) {
-          res.status(404).json({ message: "No pizza found with this id!" });
+    Users.findOneAndUpdate({ _id: params.id }, body, { new: true })
+      .then((dbUserData) => {
+        if (!dbUserData) {
+          res.status(404).json({ message: "No user found with this id!" });
           return;
         }
-        res.json(dbPizzaData);
+        res.json(dbUserData);
       })
       .catch((err) => res.status(400).json(err));
   },
