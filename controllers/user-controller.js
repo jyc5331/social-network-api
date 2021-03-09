@@ -48,16 +48,16 @@ const userController = {
       })
       .catch((err) => res.status(400).json(err));
   },
-  // delete pizza
-  deletePizza({ params }, res) {
+  // delete user
+  deleteUser({ params }, res) {
     //you can also use `deleteOne` and `deleteMany`
-    Pizza.findOneAndDelete({ _id: params.id })
-      .then((dbPizzaData) => {
-        if (!dbPizzaData) {
+    Users.findOneAndDelete({ _id: params.id })
+      .then((dbUserData) => {
+        if (!dbUserData) {
           res.status(404).json({ message: "No pizza found with this id!" });
           return;
         }
-        res.json(dbPizzaData);
+        res.json(dbUserData);
       })
       .catch((err) => res.status(400).json(err));
   },
