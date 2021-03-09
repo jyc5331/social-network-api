@@ -11,17 +11,17 @@ const userController = {
       });
   },
 
-  // get one pizza by id
-  getPizzaById({ params }, res) {
+  // get one user by id
+  getUserById({ params }, res) {
     //the following line is a request the only accesses data that matches a specific ID as opposed to accessing the whole DB
-    Pizza.findOne({ _id: params.id })
-      .then((dbPizzaData) => {
-        // If no pizza is found, send 404
-        if (!dbPizzaData) {
-          res.status(404).json({ message: "No pizza found with this id!" });
+    Users.findOne({ _id: params.id })
+      .then((dbUserData) => {
+        // If no user is found, send 404
+        if (!dbUserData) {
+          res.status(404).json({ message: "No user found with this id!" });
           return;
         }
-        res.json(dbPizzaData);
+        res.json(dbUserData);
       })
       .catch((err) => {
         console.log(err);

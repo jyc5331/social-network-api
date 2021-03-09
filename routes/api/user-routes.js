@@ -2,7 +2,7 @@ const router = require("express").Router();
 
 const {
   getAllUsers,
-  getPizzaById,
+  getUserById,
   createUser,
   updatePizza,
   deletePizza,
@@ -22,7 +22,7 @@ router
 router
   .route("/:id")
   //
-  .get(getPizzaById)
+  .get(getUserById)
   //
   .put(updatePizza)
   //
