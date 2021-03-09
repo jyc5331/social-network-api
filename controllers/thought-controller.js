@@ -1,5 +1,10 @@
 const { Thoughts, Users } = require("../models");
 
+//ADD get a single thought by ID
+//PUT to update a thought by its ID
+//DELETE to remove a thought by its ID
+//don't forget to update thought-routes
+
 const thoughtController = {
   // add thoughts to a user and add this information to another schema
   addThought({ params, body }, res) {

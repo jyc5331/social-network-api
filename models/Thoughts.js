@@ -18,15 +18,19 @@ const thoughtsSchema = new Schema(
       type: String,
       required: "username is Required",
     },
-    //reactions: [reactionsSchema]
+    reactions: [
+      {
+        type: Schema.Types.ObjectId,
+        //ref tells mongoose from whence to populate the specified array, Reactions.js
+        ref: "Reactions",
+      },
+    ],
   },
   opts
 );
 
 thoughtsSchema.virtual("reactionCount").get(function () {
-  return "hello";
-  //retrieves the length of the thought's reactions array field on query.
-  //return this.reactions.length
+  return this.reactions.length;
 });
 
 const Thoughts = model("Thoughts", thoughtsSchema);
