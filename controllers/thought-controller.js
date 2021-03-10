@@ -10,12 +10,12 @@ const thoughtController = {
       });
   },
   // add thoughts to a user and add this information to another schema
-  addThought({ params, body }, res) {
+  addThought({ body }, res) {
     console.log(body);
     Thoughts.create(body)
       .then(({ _id }) => {
         return Users.findOneAndUpdate(
-          { _id: params.userId },
+          { _id: body.userId },
           //$push works exactly like it would in vanilla JS and is built into mongoose
           { $push: { thoughts: _id } },
           { new: true }
@@ -67,11 +67,12 @@ const thoughtController = {
     //findoneanddelete deletes whatever is associated with the id and returns the data to us
     Thoughts.findOneAndDelete({ _id: params.thoughtId })
       .then((deletedThought) => {
+        console.log(deletedThought);
         if (!deletedThought) {
           return res.status(404).json({ message: "No thought with this id!" });
         }
         return Users.findOneAndUpdate(
-          { _id: params.userId },
+          { username: deletedThought.userName },
           //pull removes the established item to be deleted from the database
           { $pull: { thoughts: params.thoughtId } },
           { new: true }

@@ -11,7 +11,7 @@ const {
 // /api/thoughts/<userId>
 //remembering that a post sends data to a server
 router.route("/").get(getAllThoughts);
-router.route("/:userId").post(addThought);
+router.route("/").post(addThought);
 
 //getThoughtById and removeThought both unable to find a thought that exists
 // /api/thoughts/<userId>/<thoughtId>
