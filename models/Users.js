@@ -21,10 +21,14 @@ const UsersSchema = new Schema(
       match: [/.+@.+\..+/],
     },
 
-    //HELP Friends: Array of \_id values referencing the User model (self-reference)
-    //reactions: [reactionsSchema],
+    friends: [
+      {
+        type: Schema.Types.ObjectId,
+        //ref tells mongoose from whence to populate the specified array, Users.js
+        ref: "Users",
+      },
+    ],
     thoughts: [
-      //HELP should these actually be showing up? thoughtText isn't showing up anywhere
       {
         type: Schema.Types.ObjectId,
         //ref tells mongoose from whence to populate the specified array, Thoughts.js
@@ -36,9 +40,7 @@ const UsersSchema = new Schema(
 );
 
 UsersSchema.virtual("friendCount").get(function () {
-  return "hello";
-  //retrieves the length of the user's friends array field on query the code will be:
-  //return this.friends.length
+  return this.friends.length;
 });
 
 const Users = model("Users", UsersSchema);
