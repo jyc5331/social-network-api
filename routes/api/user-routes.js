@@ -34,7 +34,7 @@ router
   .delete(deleteUser);
 
 // /api/users/:userId/friends/:friendId
-router.route("/:Id/friends/:friendId").post(addNewFriend);
-router.route("/:Id/friends/:friendId").delete(removeFriend);
+router.route("/:userId/friends/:friendId").post(addNewFriend);
+router.route("/:userId/friends/:friendId").delete(removeFriend);
 
 module.exports = router;
