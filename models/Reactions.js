@@ -1,7 +1,7 @@
-const { Schema, Types } = require("mongoose");
+const { Schema, model, Types } = require("mongoose");
 
 const reactionsSchema = new Schema({
-  ReactionId: {
+  reactionId: {
     type: Types.ObjectId,
     default: new Types.ObjectId(),
   },
@@ -10,7 +10,7 @@ const reactionsSchema = new Schema({
     required: "A response between 1-280 characters is required.",
     maxlength: 280,
   },
-  userName: {
+  username: {
     type: String,
     required: "username is Required",
   },
@@ -22,4 +22,6 @@ const reactionsSchema = new Schema({
   },
 });
 
-module.exports = reactionsSchema;
+const Reactions = model("Reactions", reactionsSchema);
+
+module.exports = Reactions;

@@ -1,4 +1,4 @@
-const { Thoughts, Users } = require("../models");
+const { Thoughts, Users, Reactions } = require("../models");
 
 const thoughtController = {
   getAllThoughts(req, res) {
@@ -86,6 +86,40 @@ const thoughtController = {
         }
         res.json(dbUsersData);
       })
+      .catch((err) => res.json(err));
+  },
+
+  //reactions add and delete
+
+  addReaction({ params, body }, res) {
+    console.log("hello");
+    Reactions.create(body)
+      .then(({ _id }) => {
+        return Thoughts.findOneAndUpdate(
+          { _id: params.thoughtId },
+          //$push works exactly like it would in vanilla JS and is built into mongoose
+          { $push: { reactions: _id } },
+          { new: true }
+        );
+      })
+      .then((dbUsersData) => {
+        if (!dbUsersData) {
+          res.status(404).json({ message: "No thought found with this id!" });
+          return;
+        }
+        res.json(dbUsersData);
+      })
+      .catch((err) => res.status(400).json(err));
+  },
+
+  // routes api/thoughts/:thoughtId/:reactionId
+  deleteReaction({ params }, res) {
+    Thoughts.findOneAndUpdate(
+      { _id: params.thoughtId },
+      { $pull: { reactions: params.reactionId } },
+      { new: true }
+    )
+      .then((dbThoughtData) => res.json(dbThoughtData))
       .catch((err) => res.json(err));
   },
 };
