@@ -81,7 +81,7 @@ const thoughtController = {
       //the new DB is returned to the user
       .then((dbUsersData) => {
         if (!dbUsersData) {
-          res.status(404).json({ message: "No thought found with this id!" });
+          res.status(404).json({ message: "Thought successfully deleted" });
           return;
         }
         res.json(dbUsersData);
